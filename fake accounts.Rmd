@@ -1,0 +1,79 @@
+---
+title: "TwitterBotProject"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(ggplot2)
+library(rtweet)
+library(tweetbotornot)
+library(tidyverse)
+library(reprex)
+library(qdapTools)
+
+
+
+```
+
+```{r Downloading Data}
+
+
+
+moreAzeriTweets3 <- search_tweets(
+ "#StopArmenianAgression", n = 200000, retryonratelimit = TRUE, include_rts = FALSE
+)
+
+
+distinctusers <- moreAzeriTweets3 %>%
+  mutate(distinctusers = as.vector(screen_name))
+
+as.data.frame(distinctusers)
+
+```
+
+
+```{r ToDoList}
+
+# Things to Do
+
+# Look at accounts in Azerbaijan before July 12 and after
+
+# Look at when tweets were created
+
+# look at most common tweets/hashtags
+
+# look at who follows who on twitter
+
+# look at frequency of tweets
+
+# Look at different hashtages like 
+  #KarabakhisAzerbajian 
+  #KarabakhbelongstoAzerbaijan
+  #StopArmenianAggression
+  #StopArmenianOccupation 
+  #JusticeforKarabakh
+  #KarabakhbelongstoAzerbaijan
+
+
+```
+
+
+
+```{r}
+# 
+# ## select users
+users101 <- c(distinctusers$screen_name)
+# 
+# ## get botornot estimates
+data101 <- tweetbotornot(users101)
+# 
+# ## arrange by prob ests
+data101[order(data101$prob_bot), ]
+
+
+
+
+```
+
